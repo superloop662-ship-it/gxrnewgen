@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /?action=guest
+Allow: /?action=login
+Allow: /?action=signin
+
+Disallow: /api/
+Disallow: /worker/
+
+Sitemap: https://www.gxrprime.web.id/sitemap.xml
