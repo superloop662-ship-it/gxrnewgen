@@ -1,16 +1,4 @@
-Berikut versi yang sudah dihaluskan lagi agar setiap animasi, transisi, dan interaksi terasa **lebih smooth (60fps GPU-accelerated)**:
 
-### Peningkatan Kehalusan (Smoothness)
-- **Gliding Mode Pill (`Provus 4` ↔ `Provus 9`)**: Saat berpindah mode, latar gradien tombol kini meluncur mulus (*spring deceleration*) mengikuti ukuran tombol.
-- **Kurva Animasi Halus**: Menggunakan kurva `cubic-bezier(0.22, 1, 0.36, 1)` dan `will-change: transform, opacity` pada splash, modal, drawer riwayat, tombol scroll, toast, dan kemunculan balon chat.
-- **Loading & Animasi Mengetik Lebih Organik**: Gelombang titik mengetik memakai kurva sinus yang halus, *loading bar* gradasi biru–ungu bergerak tanpa patah, dan logo heksagon warna-warni berputar stabil dengan *GPU compositing*.
-- **Transisi Tema & Input**: Pergantian tema gelap/terang dan perbesaran tinggi kotak ketik (`textarea`) kini bertransisi halus tanpa lompatan visual.
-
----
-
-### Kode Lengkap `index.html`
-
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
