@@ -102,6 +102,8 @@
       --red: #ef4444;
       --grad: linear-gradient(135deg, #3b82f6, #7c6cff, #a855f7);
       --grad-load: linear-gradient(90deg, #2563eb, #38bdf8, #7c6cff, #a855f7, #2563eb);
+      --typing-text: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
+      --gxr-rainbow-text: linear-gradient(135deg, #38bdf8, #818cf8, #e879f9);
       --overlay: rgba(5, 6, 12, 0.66);
       --shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
       --hex: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
@@ -126,6 +128,8 @@
       --ac2: #8a44df;
       --acl: rgba(92, 78, 229, 0.1);
       --acg: rgba(92, 78, 229, 0.22);
+      --typing-text: linear-gradient(90deg, #2563eb, #6d28d9, #db2777, #2563eb);
+      --gxr-rainbow-text: linear-gradient(135deg, #2563eb, #7c3aed, #db2777);
       --overlay: rgba(18, 20, 38, 0.34);
       --shadow: 0 12px 30px rgba(32, 36, 78, 0.12);
       color-scheme: light;
@@ -197,7 +201,7 @@
     }
 
     /* ============================================================
-       3. LOGO HEKSAGON BERPUTAR & SPLASH SCREEN
+       3. LOGO HEKSAGON BERPUTAR & SPLASH SCREEN (LOGO SAJA)
        ============================================================ */
     .logo {
       position: relative;
@@ -244,19 +248,16 @@
       position: fixed;
       inset: 0;
       z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
+      display: grid;
+      place-items: center;
       background: #0b0c12;
       --bg2: #12141e;
       will-change: opacity, transform;
-      transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out), visibility 0.55s;
+      transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out), visibility 0.6s;
     }
     .splash.hidden {
       opacity: 0;
-      transform: scale(1.04);
+      transform: scale(1.06);
       visibility: hidden;
       pointer-events: none;
     }
@@ -264,51 +265,21 @@
       position: relative;
       display: grid;
       place-items: center;
-      animation: splashPop 0.75s var(--ease-out) both;
+      will-change: transform, opacity;
+      animation: splashEnter 0.85s var(--ease-out) both;
     }
     .sw { --s: 92px; --b: 4px; }
-    .sw .hex { animation: spin 4s linear infinite; }
+    .sw .hex { animation: spin 3.2s linear infinite; }
     .splash-ring {
       position: absolute;
       inset: -14px;
       border-radius: 50%;
       border: 2.5px solid transparent;
       border-top-color: #38bdf8;
-      border-right-color: #3b82f6;
+      border-right-color: #6366f1;
       border-bottom-color: #a855f7;
       will-change: transform;
       animation: spinReverse 1.6s linear infinite;
-    }
-    .splash-label {
-      font-family: Orbitron, monospace;
-      font-size: 0.92rem;
-      font-weight: 700;
-      letter-spacing: 1.6px;
-      background: var(--grad-load);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 2.2s linear infinite;
-    }
-
-    .splash-loader {
-      width: min(210px, 60vw);
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(59, 130, 246, 0.14);
-      overflow: hidden;
-    }
-    .splash-loader span {
-      display: block;
-      width: 48%;
-      height: 100%;
-      border-radius: 999px;
-      background: var(--grad-load);
-      background-size: 200% 100%;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
-      will-change: transform;
-      animation: loadSweep 1.35s var(--ease-sine) infinite, shimmer 1.8s linear infinite;
     }
 
     /* ============================================================
@@ -782,23 +753,24 @@
     .cp:active { transform: scale(0.94); }
     .cp.ok { background: var(--green); border-color: var(--green); color: #fff; }
 
-    /* Logo GXR warna-warni berputar + animasi AI mengetik + loading biru-ungu */
+    /* Logo GXR warna-warni berputar + animasi AI mengetik (warna pas di dark & light) */
     .ai-loading-logo {
-      --s: 34px;
-      --b: 3px;
+      --s: 36px;
+      --b: 4px;
       margin-top: 2px;
+      filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.32));
       animation: breathe 2.2s var(--ease-sine) infinite;
     }
     .ai-loading-logo .hex {
-      background: linear-gradient(135deg, #3b82f6, #06b6d4, #22c55e, #f59e0b, #ec4899, #8b5cf6);
-      background: conic-gradient(from 0deg, #3b82f6, #06b6d4, #22c55e, #eab308, #ec4899, #8b5cf6, #3b82f6);
+      background: linear-gradient(135deg, #38bdf8, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981);
+      background: conic-gradient(from 0deg, #38bdf8, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981, #38bdf8);
       animation: spin 1.6s linear infinite;
     }
     .ai-loading-logo .hx { background: var(--bg2); }
     .ai-loading-logo .hx span {
-      font-size: 8.5px;
+      font-size: 9px;
       letter-spacing: 0.4px;
-      background: linear-gradient(135deg, #38bdf8, #a855f7, #ec4899);
+      background: var(--gxr-rainbow-text);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -812,9 +784,9 @@
       max-width: 100%;
       padding: 11px 15px;
       background: var(--bg2);
-      border: 1px solid var(--bd2);
+      border: 1px solid rgba(99, 102, 241, 0.26);
       border-radius: 16px 16px 16px 4px;
-      box-shadow: 0 4px 18px rgba(59, 130, 246, 0.08);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.1);
     }
     .think {
       display: inline-flex;
@@ -824,12 +796,12 @@
     .tt {
       font-size: 0.84rem;
       font-weight: 600;
-      background: linear-gradient(90deg, #38bdf8, #7c6cff, #c084fc, #38bdf8);
+      background: var(--typing-text);
       background-size: 200% auto;
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: shimmer 2s linear infinite;
+      animation: shimmer 2.2s linear infinite;
     }
     .typing-dots {
       display: inline-flex;
@@ -840,24 +812,24 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #38bdf8;
+      background: #3b82f6;
       will-change: transform, opacity;
-      animation: typeWave 1.2s var(--ease-sine) infinite;
+      animation: typeWave 1.15s var(--ease-sine) infinite;
     }
-    .typing-dots i:nth-child(2) { background: #6366f1; animation-delay: 0.16s; }
+    .typing-dots i:nth-child(2) { background: #7c6cff; animation-delay: 0.16s; }
     .typing-dots i:nth-child(3) { background: #a855f7; animation-delay: 0.32s; }
 
     .think-bar {
       width: 100%;
-      min-width: 145px;
+      min-width: 150px;
       height: 3px;
       border-radius: 999px;
-      background: rgba(59, 130, 246, 0.14);
+      background: rgba(59, 130, 246, 0.15);
       overflow: hidden;
     }
     .think-bar span {
       display: block;
-      width: 50%;
+      width: 48%;
       height: 100%;
       border-radius: 999px;
       background: var(--grad-load);
@@ -1262,7 +1234,10 @@
        ============================================================ */
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes spinReverse { to { transform: rotate(-360deg); } }
-    @keyframes splashPop { 0% { opacity: 0; transform: scale(0.86); } 100% { opacity: 1; transform: scale(1); } }
+    @keyframes splashEnter {
+      0% { opacity: 0; transform: scale(0.72) rotate(-25deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
     @keyframes floatSoft { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
     @keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
@@ -1324,14 +1299,12 @@
     <p>GXR Prime AI hadir dengan mode Provus 4 dan Provus 9, karya M Giska Ramadhan dan Rizki Dimas O.</p>
   </div>
 
-  <!-- ===== SPLASH SCREEN ===== -->
+  <!-- ===== SPLASH SCREEN (HANYA LOGO BERPUTAR MASUK & MEMUDAR) ===== -->
   <div class="splash" id="splash">
     <div class="splash-core">
       <span class="splash-ring"></span>
       <div class="logo sw"><div class="hex"></div><div class="hx"><span>GXR</span></div></div>
     </div>
-    <div class="splash-label">GXR PRIME AI</div>
-    <div class="splash-loader" aria-hidden="true"><span></span></div>
   </div>
 
   <!-- ===== APLIKASI UTAMA ===== -->
@@ -1340,7 +1313,7 @@
       <div class="logo"><div class="hex"></div><div class="hx"><span>GXR</span></div></div>
       <div class="ttl">
         <h1><b>GXR Prime AI</b><i class="dot" id="statusDot"></i></h1>
-        <p id="statusText">Provus 4 &amp; Provus 9 · V9</p>
+        <p id="statusText">Provus V9 </p>
       </div>
       <div class="acts">
         <button class="ib" id="nc" title="Obrolan baru" aria-label="Obrolan baru">
@@ -1496,12 +1469,12 @@
     const $ = id => document.getElementById(id);
 
     // ------------------------------------------------------------
-    // 1. SPLASH SCREEN
+    // 1. SPLASH SCREEN (LOGO BERPUTAR MASUK & MEMUDAR)
     // ------------------------------------------------------------
     const splash = $('splash');
     setTimeout(() => {
       splash.classList.add('hidden');
-      setTimeout(() => splash.remove(), 580);
+      setTimeout(() => splash.remove(), 650);
     }, 1150);
 
     // ------------------------------------------------------------
@@ -2346,7 +2319,7 @@
     function updateOnlineStatus() {
       const on = navigator.onLine;
       $('statusDot').classList.toggle('offline', !on);
-      $('statusText').textContent = on ? 'Provus 4 & Provus 9 · V9' : 'Offline — AI tidak tersedia';
+      $('statusText').textContent = on ? 'Provus V9' : 'Offline — AI tidak tersedia';
       if (!busy) inp.placeholder = on ? 'Ketik pesan...' : 'Offline — tidak bisa mengirim';
     }
 
